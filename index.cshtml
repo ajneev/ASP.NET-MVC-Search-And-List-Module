@@ -1,0 +1,78 @@
+@using ChildSearchAssgn.Models
+@{
+    ViewBag.Title = "Home Page";
+}
+<script src="~/JS/function.js"></script>
+<div class="jumbotron">
+    <h1>CSUU</h1>
+    <p class="lead">Place for  viewing and updating your Child's Details.</p>
+</div>
+<div>
+    <h2>Getting started</h2>
+    <br/>
+    <input id="MySearch" class="form-control" type="text" value="" style="width:500px" onkeyup="MySearchSchools();" placeholder="Search for names.." />
+    <br/>
+    <table class="table table-hover" id="MyTable" style="display:none;">
+        <tr >
+            <th>
+                Child Id
+            </th>
+            <th>
+                Child Name
+            </th>
+            <th>
+                School Id
+            </th>
+            <th>
+                School Name
+            </th>
+            <th>
+                Options
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.childId
+                </td>
+                <td>
+                    @item.childName
+                </td>
+                <td>
+                    @item.schoolId
+                </td>
+
+                <td>
+                    @item.schoolName @ViewBag.SchoolsList
+                    @*(List<SchoolDetails>)*@
+
+                    @foreach (var item5 in (List<SchoolDetails>)ViewBag.SchoolsList)
+                    {
+                        @item5.schName
+                        <br />
+                    }
+                    @*@foreach(var i in ViewBag.SchoolsList)
+        {
+        @i;
+        }*@
+                    @*<select name="segmentation" id="target" onchange="java_script_:show(this.options[this.selectedIndex].value)" class="form-control">
+            <option selected value="@item.schoolId">@item.schoolName</option>
+
+            @foreach (var item3 in ViewBag.SchoolsList)
+            {
+                <option value="sed">@item3</option>
+            }
+        </select>*@
+                </td>
+
+                <td>
+                    @Html.ActionLink("Update", "Update", new { id = item.childId })
+                </td>
+            </tr>
+        }
+
+    </table>
+
+</div>
